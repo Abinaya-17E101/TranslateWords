@@ -69,10 +69,10 @@ class Translator:
 
 if __name__ == '__main__':
     logger.setLevel(logging.INFO)
-    word_list_file = "inputs/find_words.txt"
-    dictionary_file = "inputs/french_dictionary.csv"
-    file_to_translate = "inputs/t8.shakespeare.txt"
-    output_file = f"outputs/{file_to_translate.split('/')[-1]}.translated"
+    word_list_file = "find_words.txt"
+    dictionary_file = "french_dictionary.csv"
+    file_to_translate = "t8.shakespeare.txt"
+    output_file = "t8.shakespeare.txt.translated"
 
     t_start = time.perf_counter()
     translate_job = Translator(word_list_file, dictionary_file, file_to_translate, output_file)
