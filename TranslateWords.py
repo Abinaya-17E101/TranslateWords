@@ -23,7 +23,7 @@ class Translator:
 
     def search_dictionary(self, search_word) -> str:
         # load the dictionary into the memory if not already
-        if not self.translation_dictionary_cache:
+        if len(self.translation_dictionary_cache) == 0:
             with open(self.dictionary_file) as dictionary_csv:
                 reader = csv.reader(dictionary_csv, delimiter=',')
                 for entry in reader:
@@ -47,13 +47,16 @@ class Translator:
         with open(self.file_to_translate) as non_translated_file, open(self.output_file, 'w') as output:
             # consider anything other than alphabets and numbers to be a delimiter
             regex_to_split_words = r'[^A-Za-z0-9]+'
+            #*This Etext has certain copyright implications you should read*
             for non_translated_line in non_translated_file.readlines():
                 translated_line = non_translated_line
                 for word in re.split(regex_to_split_words, non_translated_line):
                     replaced_word = None
+                    #This
                     if word.lower() in search_terms:
                         try:
                             replaced_word = self.search_dictionary(word.lower())
+                            
                         except WordNotFoundError as e:
                             logger.error(e)
                             raise
